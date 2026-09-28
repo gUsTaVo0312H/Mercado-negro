@@ -1,10 +1,10 @@
 <div align="center">
 
-<img src="assets/blackmarket-site.png" alt="Página principal do BLACKMARKET AUCTIONS, com leilões e atividade da rede" width="100%">
+<img src="assets/mercado-negro.png" alt="Página principal do BLACKMARKET AUCTIONS com o título Mercado Negro, leilões e atividade da rede" width="100%">
 
 # BLACKMARKET AUCTIONS
 
-### Um mercado fictício de leilões com estética de terminal e interface em português.
+### Um mercado negro fictício de leilões com estética de terminal e interface em português.
 
 <p>
 	<img src="https://img.shields.io/badge/idioma-pt--BR-3dff8f?style=flat-square" alt="Idioma: português brasileiro">
@@ -26,7 +26,7 @@ O BLACKMARKET é uma demonstração front-end de uma rede privada de leilões fi
 
 Veja lotes em andamento e futuros, acompanhe lances e abra os detalhes de cada item.
 
-![Captura da página principal do mercado, com lotes, painel de atividade e tema escuro](assets/blackmarket-site.png)
+![Captura atualizada da página Mercado Negro, com lotes, painel de atividade e tema escuro](assets/mercado-negro.png)
 
 ### Cadastro e acesso
 
