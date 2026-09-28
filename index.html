@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BLACKMARKET AUCTIONS — Rede privada de leilões</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="particles" aria-hidden="true"></canvas>
+  <div class="scanlines" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+
+  <!-- Tela de entrada -->
+  <section id="intro" class="intro" aria-label="Conectando">
+    <div class="intro-box">
+      <h1 class="logo glitch" data-text="BLACKMARKET">BLACKMARKET</h1>
+      <p class="intro-sub">REDE PRIVADA DE LEILÕES</p>
+      <ul id="introLog" class="intro-log"></ul>
+      <div class="loadbar"><span id="loadFill"></span></div>
+      <button id="enterBtn" class="btn btn-primary" hidden>ACESSAR REDE</button>
+    </div>
+  </section>
+
+  <div id="app" class="app" hidden>
+    <header class="site-header">
+      <a href="#hero" class="logo logo-small">BLACKMARKET</a>
+      <button id="menuToggle" class="menu-toggle" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav id="mainNav" class="main-nav" aria-label="Principal">
+        <a href="#live">Leilões</a>
+        <a href="#upcoming">Em breve</a>
+        <a href="#watchlist">Lista de interesse</a>
+        <a href="#terminal">Terminal</a>
+        <a href="#profile">Perfil</a>
+      </nav>
+      <button class="btn account-link" onclick= "window.location.href='login.html'">Entrar / criar conta</button>
+      <div class="net-status"><i class="dot"></i> REDE ATIVA · <b id="onlineUsers">0</b> nós</div>
+    </header>
+
+    <main>
+      <section id="hero" class="hero reveal">
+        <div class="hero-text">
+          <span class="badge badge-live">AO VIVO</span>
+          <h2 class="glitch" data-text="BEM-VINDO AO MERCADO SOMBRIO">BEM-VINDO AO MERCADO SOMBRIO</h2>
+          <p>Onde itens raros mudam de mãos.</p>
+          <div class="hero-actions">
+            <button class="btn btn-primary magnetic" data-open="47">ENTRAR NO LEILÃO</button>
+            <a class="btn magnetic" href="#upcoming">VER LOTES</a>
+          </div>
+        </div>
+        <aside class="hero-panel" aria-label="Atividade da rede">
+          <p class="label">Encerramento do lote em</p>
+          <p class="big-count" id="heroCountdown">00:00:00</p>
+          <svg id="activityChart" viewBox="0 0 300 80" preserveAspectRatio="none" aria-hidden="true"><polyline points=""/></svg>
+          <p class="label">Atividade da rede</p>
+        </aside>
+      </section>
+
+      <section id="featured" class="featured reveal" aria-labelledby="featTitle">
+        <div class="lot-art lot-art-xl parallax" style="--hue:145"><span>◐</span></div>
+        <article class="featured-info">
+          <p class="label">Artefato confidencial</p>
+          <h3 id="featTitle">LOTE #047 — BLACK ECLIPSE</h3>
+          <dl class="stats">
+            <div><dt>Maior lance</dt><dd id="featBid" data-tooltip="Maior oferta aceita">0</dd></div>
+            <div><dt>Tempo restante</dt><dd id="featTime">--</dd></div>
+            <div><dt>Participantes</dt><dd id="featBidders">0</dd></div>
+            <div><dt>Status</dt><dd class="badge badge-live">AO VIVO</dd></div>
+          </dl>
+          <ol id="featHistory" class="history"></ol>
+          <button class="btn btn-primary magnetic" data-open="47">FAZER LANCE</button>
+        </article>
+      </section>
+
+      <div class="layout">
+        <section id="live" class="reveal" aria-labelledby="liveTitle">
+          <h3 id="liveTitle" class="section-title">Lotes ao vivo e em breve</h3>
+          <div id="lotGrid" class="lot-grid"></div>
+          <span id="upcoming"></span>
+        </section>
+        <aside class="activity reveal" aria-labelledby="actTitle">
+          <h3 id="actTitle" class="section-title">Atividade da rede</h3>
+          <ul id="activityFeed" class="feed"></ul>
+        </aside>
+      </div>
+
+      <section id="watchlist" class="reveal" aria-labelledby="watchTitle">
+        <h3 id="watchTitle" class="section-title">Lista de interesse</h3>
+        <ul id="watchList" class="watch-list"></ul>
+      </section>
+
+      <section id="terminal" class="reveal" aria-labelledby="termTitle">
+        <h3 id="termTitle" class="section-title">Terminal</h3>
+        <div class="terminal">
+          <div id="termOutput" class="term-output" aria-live="polite"></div>
+          <form id="termForm" class="term-form" autocomplete="off">
+            <label for="termInput">$</label>
+            <input id="termInput" type="text" placeholder="digite: status, varrer, leiloes, rede, limpar">
+          </form>
+          <div class="term-chips">
+            <button type="button" data-cmd="status">status</button>
+            <button type="button" data-cmd="varrer">varrer</button>
+            <button type="button" data-cmd="leiloes">leiloes</button>
+            <button type="button" data-cmd="rede">rede</button>
+            <button type="button" data-cmd="limpar">limpar</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="profile" class="reveal" aria-labelledby="profTitle">
+        <h3 id="profTitle" class="section-title">Perfil</h3>
+        <div class="profile">
+          <dl class="stats">
+            <div><dt>Usuário</dt><dd>GHOST_731</dd></div>
+            <div><dt>Reputação</dt><dd data-count="96">0</dd></div>
+            <div><dt>Lances feitos</dt><dd id="profBids" data-count="128">0</dd></div>
+            <div><dt>Lotes acompanhados</dt><dd id="profWatched">0</dd></div>
+            <div><dt>Taxa de vitórias</dt><dd><span data-count="37">0</span>%</dd></div>
+          </dl>
+          <svg class="bars" viewBox="0 0 220 90" aria-label="Lances por semana (fictício)">
+            <rect x="8" y="50" width="22" height="40"/><rect x="42" y="30" width="22" height="60"/>
+            <rect x="76" y="58" width="22" height="32"/><rect x="110" y="18" width="22" height="72"/>
+            <rect x="144" y="40" width="22" height="50"/><rect x="178" y="8" width="22" height="82"/>
+          </svg>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">Demonstração fictícia. Sem itens, pagamentos ou contas reais.</footer>
+  </div>
+
+  <!-- Modal -->
+  <div id="modal" class="modal" hidden>
+    <div class="modal-backdrop" data-close></div>
+    <article class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" data-close aria-label="Fechar">✕</button>
+      <div id="modalArt" class="lot-art lot-art-lg"><span>◐</span></div>
+      <div class="modal-body">
+        <span id="modalStatus" class="badge"></span>
+        <h3 id="modalTitle"></h3>
+        <p id="modalDesc"></p>
+        <dl class="stats">
+          <div><dt>Lance inicial</dt><dd id="modalStart"></dd></div>
+          <div><dt>Maior lance</dt><dd id="modalBid"></dd></div>
+          <div><dt>Participantes</dt><dd id="modalBidders"></dd></div>
+          <div><dt>Tempo restante</dt><dd id="modalTime"></dd></div>
+        </dl>
+        <ol id="modalHistory" class="history"></ol>
+        <form id="bidForm" class="bid-form">
+          <input id="bidInput" type="number" min="1" step="50" required placeholder="Seu lance" aria-label="Seu lance">
+          <button class="btn btn-primary" type="submit">FAZER LANCE</button>
+        </form>
+        <p id="bidError" class="bid-error" role="alert"></p>
+      </div>
+    </article>
+  </div>
+
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
